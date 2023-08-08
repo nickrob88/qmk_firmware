@@ -34,6 +34,8 @@ enum custom_keycodes {
   ADJUST,
   UK_HASH,
   ARROW,
+  UN1,
+  UN2,
   PW
 };
 
@@ -44,7 +46,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,     KC_BSPC,\
   KC_CAPS, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN,  KC_QUOT,\
   KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_TRNS, KC_TRNS, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,  KC_RSFT,\
-                             KC_DEL,  KC_LGUI, LOWER,   KC_SPC,  KC_ENT,  RAISE,   KC_LCTRL, KC_LALT\
+                             KC_LCTRL,KC_LGUI, LOWER,   KC_SPC,  KC_ENT,  RAISE,   KC_LALT, KC_DEL\
 ),
 [_LOWER] = LAYOUT(\
   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                     KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,\
@@ -54,11 +56,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS\
 ),
 [_RAISE] = LAYOUT( \
-  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                       KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11, KC_F12,\
-  KC_TRNS, KC_TRNS, KC_TRNS, KC_PGUP, KC_TRNS, KC_TRNS,                     KC_TRNS, KC_TRNS, KC_UP,   KC_TRNS, KC_TRNS, KC_BSPC,\
-  KC_TRNS, KC_TRNS, KC_HOME, KC_PGDN, KC_END,  KC_TRNS,                     KC_TRNS, KC_LEFT, KC_DOWN, KC_RGHT, KC_PIPE, KC_TILD,\
+  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                       KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,\
+  KC_TRNS, KC_TRNS, KC_TRNS, KC_PGUP, KC_TRNS, KC_TRNS,                     UN1,     KC_TRNS, KC_UP,   KC_TRNS, PW,      KC_BSPC,\
+  KC_TRNS, KC_TRNS, KC_HOME, KC_PGDN, KC_END,  KC_TRNS,                     UN2,     KC_LEFT, KC_DOWN, KC_RGHT, KC_PIPE, KC_TILD,\
   KC_TRNS, KC_MINS, KC_UNDS, KC_PLUS, KC_EQL,  UK_HASH, KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_BSLS, KC_CAPS,\
-                             PW,      KC_TRNS, KC_TRNS, KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS \
+                             KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS \
 ),
 [_ADJUST] = LAYOUT( \
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
@@ -164,6 +166,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
+    case UN1:
+      if (record->event.pressed) {
+        SEND_STRING("nick.roberts@sky.uk");
+      }
+      return false;
+      break;
+    case UN2:
+      if (record->event.pressed) {
+        SEND_STRING("nro18");
+      }
+      return false;
+      break; 
     case PW:
       if (record->event.pressed) {
         SEND_STRING("");
